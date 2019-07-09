@@ -23,7 +23,6 @@ def load_conference_page_context(app, page):
 
     Returns an empty dict if it isn't run on a proper conference page.
     """
-    data = {}
     if page.startswith('conf'):
         p = PurePath(page)
         try:
@@ -32,18 +31,70 @@ def load_conference_page_context(app, page):
             # If the second part is not the year, this is a document
             # about sponsorship or similar generic pages, that need
             # no conference-specific context.
-            return data
+            return {}
         if year >= 2018:
-            if year < 2020:
-                yaml_file = '_data/config-' + p.parts[1] + '-' + p.parts[2] + '.yaml'
-            else:
-                yaml_file = '_data/' + p.parts[1] + '-' + p.parts[2] + '-config.yaml'
-            try:
-                yaml_config = load_yaml(yaml_file)
-                data.update(yaml_config)
-            except (YAMLError, OSError) as error:
-                log.warning('Unable to process conference YAML file %s while rendering %s: %s', yaml_file, page, error)
+            return load_conference_context_from_yaml(p, page, year)
+    return {}
+
+
+def load_conference_context_from_yaml(p, page, year):
+    data = {}
+    if year < 2020:
+        yaml_file = '_data/config-' + p.parts[1] + '-' + p.parts[2] + '.yaml'
+    else:
+        yaml_file = '_data/' + p.parts[1] + '-' + p.parts[2] + '-config.yaml'
+    data.update(load_yaml_log_error(page, yaml_file))
+
+    if year < 2020:
+        return data
+
+    speakers = load_yaml_log_error(page, '_data/' + p.parts[1] + '-' + p.parts[2] + '-speakers.yaml')
+    speakers_by_slug = {speaker['slug']: speaker for speaker in speakers}
+    schedule = {}
+    if data['flaghaswritingday']:
+        schedule['writing_day'] = load_yaml_log_error(page, '_data/' + p.parts[1] + '-' + p.parts[2] + '-writing-day.yaml')
+    for day in range(1, data['date']['total_talk_days'] + 1):
+        key = 'day' + str(day)
+        schedule[key] = load_yaml_log_error(page, '_data/' + p.parts[1] + '-' + p.parts[2] + '-day-' + str(day) + '.yaml')
+
+    for day_schedule in schedule.values():
+        for item in day_schedule:
+            # Check for required slug or title
+            if 'slug' in item:
+                try:
+                    item['data'] = speakers_by_slug[item['slug']]
+                    item['speaker_names'] = combine_speaker_names(item['data']['speakers'])
+                except KeyError:
+                    log.warning('Unable to find details for session %s in page %s', item['Slug'], page)
+
+    data['schedule'] = schedule
     return data
+
+
+def load_yaml_log_error(page, yaml_file):
+    try:
+        yaml_config = load_yaml(yaml_file)
+        return yaml_config
+    except (YAMLError, OSError) as error:
+        log.warning('Unable to process conference YAML file %s while rendering %s: %s', yaml_file, page, error)
+        return {}
+
+
+def combine_speaker_names(speakers):
+    # TODO: refactor me
+    items = [s['name'] for s in speakers]
+    if len(items) == 1:
+        return items[0]
+    if len(items) == 2:
+        return '%s and %s' % (items[0], items[1])
+    format_str = ''
+    for i, item in enumerate(items):
+        if i == len(items) - 1:
+            format_str += 'and {}'
+        else:
+            format_str += '{}, '
+
+    return format_str.format(*items)
 
 
 def render_rst_with_jinja(app, docname, source):

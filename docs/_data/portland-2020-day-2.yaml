@@ -1,80 +1,46 @@
-- Duration: '60'
-  Session: Doors Open, Breakfast Served
-  Time: '8:00'
-- Duration: '30'
-  Session: Alicja Raszkowska - Draw the Docs
-  Slug: alicja-raszkowska
-  Time: '9:00'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '9:30'
-- Duration: '0'
-  Session: "<b>Job Fair Starts (Lola's Room)</b>"
-  Time: '9:40'
-- Duration: '30'
-  Session: 'Sarah Moir - Just Add Data: Make it easier to prioritize your documentation'
-  Slug: sarah-moir
-  Time: '9:40'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '10:10'
-- Duration: '30'
-  Session: 'Matt Reiner - Show Me the Money: How to Get Your Docs the Love and Support
-    They Deserve'
-  Slug: matt-reiner
-  Time: '10:20'
-- Duration: '20'
-  Session: Snack break
-  Time: '10:50'
-- Duration: '30'
-  Session: 'Chris Bush - SDK Reference Manuals: A flow-based approach'
-  Slug: chris-bush
-  Time: '11:10'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '11:40'
-- Duration: '15'
-  Session: "<i>Sponsored Talk</i>: Riona MacNamara - Documentation for Good: Knowledge as a tool for equity and inclusion"
-  Time: '11:50'
-  Slug: riona-macnamara
-- Duration: '75'
-  Session: Lunch (60 mins)
-  Time: '12:05'
-- Duration: '15'
-  Session: "Behind the Scenes with Aaron and Vanessa"
-  Time: '1:05'
-- Duration: '30'
-  Session: Lightning Talks (30 mins) 
-  Time: '1:20'
-- Duration: '0'
-  Session: "<b>Unconference Starts (Lola's Room)</b>"
-  Time: '1:20'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '1:50'
-- Duration: '30'
-  Session: 'Kay Miles - Product Documentation Strategy: What Is It and Why Do We Need
-    It?'
-  Slug: kay-miles
-  Time: '2:00'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '2:30'
-- Duration: '30'
-  Session: Jessica Parsons - Lessons Learned in a Year of Docs-Driven Development
-  Slug: jessica-parsons
-  Time: '2:40'
-- Duration: '10'
-  Session: Switch Speakers
-  Time: '3:10'
-- Duration: '30'
-  Session: 'Jodie Putrino - Defying the Status Quo: How a grassroots effort can transform
-    an organization'
-  Slug: jodie-putrino
-  Time: '3:20'
-- Duration: '10'
-  Session: Closing address
-  Time: '3:50'
-- Duration: '20'
-  Session: "<b>Conference Ends</b> :("
-  Time: '4:00'
+- time: '8:00'
+  title: Doors Open, Breakfast Served
+- time: '9:00'
+  slug: draw-the-docs-alicja-raszkowska
+- time: '9:30'
+  title: Switch Speakers
+- time: '9:40'
+  title: "<b>Job Fair Starts (Lola's Room)</b>"
+- time: '9:40'
+  slug: just-add-data-make-it-easier-to-prioritize-your-documentation-sarah-moir
+- time: '10:10'
+  title: Switch Speakers
+- time: '10:20'
+  slug: show-me-the-money-how-to-get-your-docs-the-love-and-support-they-deserve-matt-reiner
+- time: '10:50'
+  title: Snack break
+- time: '11:10'
+  slug: sdk-reference-manuals-a-flow-based-approach-chris-bush
+- time: '11:40'
+  title: Switch Speakers
+- time: '11:50'
+  slug: documentation-for-good-riona-macnamara
+- time: '12:05'
+  title: Lunch (60 mins)
+- time: '1:05'
+  title: "Behind the Scenes with Aaron and Vanessa"
+- time: '1:20'
+  title: Lightning Talks (30 mins) 
+- time: '1:20'
+  title: "<b>Unconference Starts (Lola's Room)</b>"
+- time: '1:50'
+  title: Switch Speakers
+- time: '2:00'
+  slug: product-documentation-strategy-what-is-it-and-why-do-we-need-it-kay-miles
+- time: '2:30'
+  title: Switch Speakers
+- time: '2:40'
+  slug: lessons-learned-in-a-year-of-docs-driven-development-jessica-parsons
+- time: '3:10'
+  title: Switch Speakers
+- time: '3:20'
+  slug: defying-the-status-quo-how-a-grassroots-effort-can-transform-an-organization-jodie-putrino
+- time: '3:50'
+  title: Closing address
+- time: '4:00'
+  title: "<b>Conference Ends</b> :("
